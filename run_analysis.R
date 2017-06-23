@@ -2,7 +2,7 @@
 # R package required
 ##########################################################################################
 
-# Function to check if the reqiured package is installed.
+# Function to check if the required package is installed.
 is.installed <- function(mypkg) is.element(mypkg, installed.packages()[,1]) 
 if(!is.installed("plyr")){install.packages("plyr")}
 
