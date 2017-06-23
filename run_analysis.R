@@ -1,7 +1,7 @@
 # run_analysis.R - R script for Getting-and-Cleaning-Data-Course-Project
 
 # Clement Kan
-# 16 Jun 2017 
+# 23 Jun 2017 
 
 ##########################################################################################
 # R package required
