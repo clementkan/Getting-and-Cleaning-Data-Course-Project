@@ -1,7 +1,9 @@
+# R script for Getting-and-Cleaning-Data-Course-Project
+# Clement Kan, 16 Jun 2017 
+
 ##########################################################################################
 # R package required
 ##########################################################################################
-
 # Function to check if the required package is installed.
 is.installed <- function(mypkg) is.element(mypkg, installed.packages()[,1]) 
 if(!is.installed("plyr")){install.packages("plyr")}
@@ -10,13 +12,9 @@ if(!is.installed("plyr")){install.packages("plyr")}
 library(plyr)
 
 
-
-
-
 ##########################################################################################
 # Data collection
 ##########################################################################################
-
 # Create a directory called `data` to contain the file we're going to download.
 dir.create("./data")
 
@@ -31,13 +29,9 @@ unzip(zipfile = "./data/dataset.zip", exdir = "./data")
 path <- file.path("./data", "UCI HAR Dataset")
 
 
-
-
-
 ##########################################################################################
 # Load the data sets into the R.
 ##########################################################################################
-
 # Read the Data Features files.
 dataFeaturesTrain <- read.table(file = file.path(path, "train", "X_train.txt"), header = FALSE)
 dataFeaturesTest <- read.table(file = file.path(path, "test", "X_test.txt"), header = FALSE)
@@ -51,13 +45,9 @@ dataActivityTrain <- read.table(file = file.path(path, "train", "y_train.txt"), 
 dataActivityTest <- read.table(file = file.path(path, "test", "y_test.txt"), header = FALSE)
 
 
-
-
-
 ##########################################################################################
 # Merge the training and the test sets to create one data set.
 ##########################################################################################
-
 # Merge the training data set.
 dataTrain <- cbind(dataFeaturesTrain, dataSubjectTrain, dataActivityTrain)
 
@@ -68,13 +58,9 @@ dataTest <- cbind(dataFeaturesTest, dataSubjectTest, dataActivityTest)
 dataCombine <- rbind(dataTrain, dataTest)
 
 
-
-
-
 ##########################################################################################
 # Extracts only the measurements on the mean and standard deviation for each measurement.
 ##########################################################################################
-
 # Assign column names to the data frame.
 featuresNames <- read.table(file = file.path(path, "features.txt"))
 names(dataCombine) <- c(as.character(featuresNames[,2]), "Subject", "Activity")
@@ -84,13 +70,9 @@ dataSubset <- grep("\\bmean\\b|\\bstd\\b", names(dataCombine), value = TRUE)
 data <- subset(dataCombine, select = c(dataSubset, "Subject", "Activity"))
 
 
-
-
-
 ##########################################################################################
 # Use descriptive activity names to name the activities in the data set.
 ##########################################################################################
-
 # Read the activity labels file.
 activity_labels <- read.table(file = file.path(path, "activity_labels.txt"))
 
@@ -99,13 +81,9 @@ data$Activity <- factor(data$Activity, levels = c(1, 2, 3, 4, 5, 6),
                         labels = activity_labels[, 2])
 
 
-
-
-
 ##########################################################################################
 # Appropriately labels the data set with descriptive variable names.
 ##########################################################################################
-
 names(data) <- gsub("^t", "Time", names(data))
 names(data) <- gsub("^f", "Frequency", names(data))
 names(data) <- gsub("Acc", "Accelerometer", names(data))
@@ -116,13 +94,9 @@ names(data) <- gsub("-mean\\(\\)", "Mean", names(data))
 names(data) <- gsub("-std\\(\\)", "StdDev", names(data))
 
 
-
-
-
 ##########################################################################################
 # From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 ##########################################################################################
-
 # Aggregate the "data" data frame by Subject and Activity, returning the means for the Features variables.
 data2 <- aggregate(. ~Subject + Activity, data, mean)
 data2 <- data2[order(data2$Subject,data2$Activity),]
