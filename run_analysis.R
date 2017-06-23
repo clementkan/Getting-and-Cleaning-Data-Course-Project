@@ -17,18 +17,15 @@ library(plyr)
 ##########################################################################################
 # Data collection
 ##########################################################################################
-# Create a directory called `data` to contain the file we're going to download.
-dir.create("./data")
-
 # Download the file from the web. The downloaded file will be called `dataset.zip`.
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-download.file(url, destfile = "./data/dataset.zip", method = "curl") # Mac user specify method = "curl".
+download.file(url, destfile = "./dataset.zip", method = "curl") # Mac user specify method = "curl".
 
 # Open the compressed file.
-unzip(zipfile = "./data/dataset.zip", exdir = "./data")
+unzip(zipfile = "./dataset.zip", exdir = "./")
 
 # Construct a path to the `UCI HAR Dataset` directory.
-path <- file.path("./data", "UCI HAR Dataset")
+path <- file.path("./UCI HAR Dataset")
 
 
 ##########################################################################################
