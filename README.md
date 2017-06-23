@@ -1,4 +1,4 @@
-## Getting and Cleaning Data Course Project
+## README - Getting and Cleaning Data Course Project
 
 Clement Kan
 
