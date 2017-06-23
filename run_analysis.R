@@ -104,4 +104,4 @@ data2 <- aggregate(. ~Subject + Activity, data, mean)
 data2 <- data2[order(data2$Subject,data2$Activity),]
 
 # Export the tidy data set.
-write.table(data2, file = "tidy_dataset.txt", row.names = FALSE, col.names = FALSE)
+write.table(data2, file = "tidy_dataset.txt", row.names = FALSE)
