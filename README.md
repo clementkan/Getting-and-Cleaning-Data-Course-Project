@@ -1,6 +1,7 @@
 ## Getting and Cleaning Data Course Project
 
 Clement Kan
+
 16 Jun 2017
 
 This repository contains my submission for the course project for Coursera "Getting and Cleaning Data" course by Johns Hopkins University.
